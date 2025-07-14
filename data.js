@@ -391,5 +391,19 @@ const projects = [
         notes: "Replaced the previous Sunny with a transparent version. Positioned Sunny to the bottom-right of the widget and added a bounce animation. Styling matches the Akron CPR widget with proper text alignment, branding colors, and mobile-friendly layout. Final adjustments included reducing Sunny's right margin to bring her closer to the text",
         actions: "Verify widget placement on the live site and confirm visibility across screen sizes. Optional: Flip Sunny horizontally to face the content or add hover effects for interactivity. Monitor feedback form submissions and consider adding a 'Thank You' animation or banner after submission",
         completion: 100
+    },
+    {
+        id: 29,
+        name: "Safety Banner - Temperature Awareness Update",
+        status: "Completed",
+        priority: "High",
+        type: "Safety",
+        startDate: "2025-07-14",
+        dueDate: "2025-07-14",
+        category: "Work - Safety",
+        objective: "Updated safety banner with comprehensive summer temperature messaging and heat illness prevention",
+        notes: "Enhanced the rotating safety banner with temperature-specific content including heat illness prevention, hydration reminders, cooling station locations, and updated Sunny's messaging for summer safety awareness. Added OSHA heat safety guidelines and created mobile-responsive temperature alert styling. Integrated with existing 3-column flexbox design while maintaining brand consistency.",
+        actions: "Monitor staff engagement with temperature messaging, track heat-related incident reports, plan transition to fall safety topics by September, consider adding temperature-based automatic banner switching",
+        completion: 100
     }
 ];

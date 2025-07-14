@@ -225,20 +225,6 @@ const projects = [
         completion: 100
     },
     {
-        id: 17,
-        name: "Radio Log Web Page",
-        status: "Not Started",
-        priority: "Low",
-        type: "Web Development",
-        startDate: "2025-04-24",
-        dueDate: "",
-        category: "Work- Web Dev",
-        objective: "NA",
-        notes: "NA",
-        actions: "NA",
-        completion: 0
-    },
-    {
         id: 18,
         name: "Dayton Map Nato Project",
         status: "Completed",
@@ -305,20 +291,6 @@ const projects = [
         category: "Work - Web Dev",
         objective: "",
         notes: "",
-        actions: "",
-        completion: 0
-    },
-    {
-        id: 23,
-        name: "Fire Drill Webpage",
-        status: "Ongoing",
-        priority: "Low",
-        type: "Web Development",
-        startDate: "2025-05-09",
-        dueDate: "",
-        category: "Work - Web Dev",
-        objective: "NA",
-        notes: "NA",
         actions: "",
         completion: 0
     },

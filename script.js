@@ -137,8 +137,8 @@ function createProjectCard(project) {
                 <span class="meta-value">${formatDate(project.startDate)}</span>
             </div>
             <div class="meta-item">
-                <span class="meta-label">Priority:</span>
-                <span class="meta-value">${project.priority}</span>
+                <span class="meta-label">Category:</span>
+                <span class="meta-value">${project.category}</span>
             </div>
         </div>
         

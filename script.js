@@ -1,179 +1,208 @@
-// Initialize the app
+// Global variables
+let filteredProjects = [...projects];
+let currentView = 'cards';
+
+// DOM elements
+const projectsContainer = document.getElementById('projects-container');
+const tableBody = document.getElementById('table-body');
+const searchInput = document.getElementById('search-input');
+const statusFilter = document.getElementById('status-filter');
+const typeFilter = document.getElementById('type-filter');
+const viewToggle = document.getElementById('view-toggle');
+const totalProjectsSpan = document.getElementById('total-projects');
+const completedProjectsSpan = document.getElementById('completed-projects');
+const ongoingProjectsSpan = document.getElementById('ongoing-projects');
+const avgProgressSpan = document.getElementById('avg-progress');
+
+// Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    renderProjects();
     updateStats();
+    renderProjects();
     setupEventListeners();
 });
 
+// Set up event listeners
 function setupEventListeners() {
-    document.getElementById('statusFilter').addEventListener('change', filterProjects);
-    document.getElementById('typeFilter').addEventListener('change', filterProjects);
-    document.getElementById('searchFilter').addEventListener('input', filterProjects);
+    searchInput.addEventListener('input', filterProjects);
+    statusFilter.addEventListener('change', filterProjects);
+    typeFilter.addEventListener('change', filterProjects);
+    viewToggle.addEventListener('click', toggleView);
 }
 
+// Update statistics
+function updateStats() {
+    const total = projects.length;
+    const completed = projects.filter(p => p.status === 'Completed').length;
+    const ongoing = projects.filter(p => p.status === 'Ongoing').length;
+    const avgProgress = Math.round(projects.reduce((sum, p) => sum + p.completion, 0) / total);
+
+    totalProjectsSpan.textContent = total;
+    completedProjectsSpan.textContent = completed;
+    ongoingProjectsSpan.textContent = ongoing;
+    avgProgressSpan.textContent = avgProgress + '%';
+}
+
+// Filter projects based on search and filters
+function filterProjects() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const statusFilterValue = statusFilter.value;
+    const typeFilterValue = typeFilter.value;
+
+    filteredProjects = projects.filter(project => {
+        const matchesSearch = project.name.toLowerCase().includes(searchTerm) ||
+                            project.notes.toLowerCase().includes(searchTerm) ||
+                            project.objective.toLowerCase().includes(searchTerm);
+        
+        const matchesStatus = statusFilterValue === '' || project.status === statusFilterValue;
+        const matchesType = typeFilterValue === '' || project.type === typeFilterValue;
+
+        return matchesSearch && matchesStatus && matchesType;
+    });
+
+    renderProjects();
+}
+
+// Toggle between card and table view
+function toggleView() {
+    currentView = currentView === 'cards' ? 'table' : 'cards';
+    viewToggle.textContent = currentView === 'cards' ? '📋 Table View' : '📊 Card View';
+    renderProjects();
+}
+
+// Render projects based on current view
 function renderProjects() {
-    const grid = document.getElementById('projectGrid');
-    const tableBody = document.getElementById('tableBody');
+    if (currentView === 'cards') {
+        renderCardView();
+        document.getElementById('cards-container').style.display = 'block';
+        document.getElementById('table-container').style.display = 'none';
+    } else {
+        renderTableView();
+        document.getElementById('cards-container').style.display = 'none';
+        document.getElementById('table-container').style.display = 'block';
+    }
+}
+
+// Render card view
+function renderCardView() {
+    projectsContainer.innerHTML = '';
     
-    grid.innerHTML = '';
-    tableBody.innerHTML = '';
-
-    projects.forEach(project => {
-        // Render card view
+    filteredProjects.forEach(project => {
         const card = createProjectCard(project);
-        grid.appendChild(card);
+        projectsContainer.appendChild(card);
+    });
 
-        // Render table row
+    if (filteredProjects.length === 0) {
+        projectsContainer.innerHTML = '<div class="no-results">No projects found matching your criteria.</div>';
+    }
+}
+
+// Render table view
+function renderTableView() {
+    tableBody.innerHTML = '';
+    
+    filteredProjects.forEach(project => {
         const row = createTableRow(project);
         tableBody.appendChild(row);
     });
+
+    if (filteredProjects.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="8" class="no-results">No projects found matching your criteria.</td></tr>';
+    }
 }
 
+// Create project card
 function createProjectCard(project) {
     const card = document.createElement('div');
     card.className = 'project-card';
-    card.style.position = 'relative';
     
-    const statusClass = `status-${project.status.toLowerCase().replace(' ', '-')}`;
-    const priorityClass = `priority-${project.priority.toLowerCase()}`;
+    const priorityClass = project.priority.toLowerCase().replace(' ', '-');
+    const statusClass = project.status.toLowerCase().replace(' ', '-');
     
     card.innerHTML = `
-        <div class="priority-indicator ${priorityClass}"></div>
         <div class="project-header">
-            <div>
-                <div class="project-title">${project.name}</div>
-                <div class="project-type">${project.type}</div>
+            <h3 class="project-title">${project.name}</h3>
+            <div class="project-badges">
+                <span class="badge priority-${priorityClass}">${project.priority}</span>
+                <span class="badge status-${statusClass}">${project.status}</span>
             </div>
-            <div class="status-badge ${statusClass}">${project.status}</div>
         </div>
         
-        <div class="project-details">
-            <div class="detail-row">
-                <span class="detail-label">Priority:</span>
-                <span class="detail-value">${project.priority}</span>
+        <div class="project-meta">
+            <div class="meta-item">
+                <span class="meta-label">Type:</span>
+                <span class="meta-value">${project.type}</span>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Start Date:</span>
-                <span class="detail-value">${formatDate(project.startDate)}</span>
+            <div class="meta-item">
+                <span class="meta-label">Start Date:</span>
+                <span class="meta-value">${formatDate(project.startDate)}</span>
             </div>
-            ${project.dueDate ? `
-            <div class="detail-row">
-                <span class="detail-label">Due Date:</span>
-                <span class="detail-value">${formatDate(project.dueDate)}</span>
+            <div class="meta-item">
+                <span class="meta-label">Category:</span>
+                <span class="meta-value">${project.category}</span>
             </div>
-            ` : ''}
         </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: ${project.completion}%"></div>
+        
+        <div class="project-objective">
+            <strong>Objective:</strong> ${project.objective}
         </div>
-        <div style="text-align: center; margin-top: 8px; font-weight: 600; color: #495057;">
-            ${project.completion}% Complete
-        </div>
-
-        ${project.notes !== 'NA' && project.notes !== '' ? `
+        
         <div class="project-notes">
-            <div class="notes-title">Current Status:</div>
-            <div class="notes-content">${project.notes}</div>
+            <strong>Notes:</strong> ${project.notes}
         </div>
-        ` : ''}
+        
+        <div class="progress-section">
+            <div class="progress-header">
+                <span class="progress-label">Progress</span>
+                <span class="progress-percentage">${project.completion}%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${project.completion}%"></div>
+            </div>
+        </div>
     `;
     
     return card;
 }
 
+// Create table row
 function createTableRow(project) {
     const row = document.createElement('tr');
-    const statusClass = `status-${project.status.toLowerCase().replace(' ', '-')}`;
+    
+    const priorityClass = project.priority.toLowerCase().replace(' ', '-');
+    const statusClass = project.status.toLowerCase().replace(' ', '-');
     
     row.innerHTML = `
-        <td>${project.name}</td>
-        <td><span class="status-badge ${statusClass}">${project.status}</span></td>
-        <td>${project.priority}</td>
+        <td class="project-name">${project.name}</td>
+        <td><span class="badge status-${statusClass}">${project.status}</span></td>
+        <td><span class="badge priority-${priorityClass}">${project.priority}</span></td>
         <td>${project.type}</td>
-        <td>${project.completion}%</td>
-        <td>${project.dueDate ? formatDate(project.dueDate) : 'No due date'}</td>
+        <td>${formatDate(project.startDate)}</td>
+        <td class="progress-cell">
+            <div class="table-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${project.completion}%"></div>
+                </div>
+                <span class="progress-text">${project.completion}%</span>
+            </div>
+        </td>
+        <td class="notes-cell">${project.notes}</td>
     `;
     
     return row;
 }
 
+// Format date helper
 function formatDate(dateString) {
-    if (!dateString) return 'No date';
+    if (!dateString) return 'N/A';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
     });
 }
 
-function filterProjects() {
-    const statusFilter = document.getElementById('statusFilter').value;
-    const typeFilter = document.getElementById('typeFilter').value;
-    const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
-
-    const cards = document.querySelectorAll('.project-card');
-    const rows = document.querySelectorAll('#tableBody tr');
-
-    projects.forEach((project, index) => {
-        let show = true;
-
-        if (statusFilter !== 'all' && project.status !== statusFilter) {
-            show = false;
-        }
-
-        if (typeFilter !== 'all' && project.type !== typeFilter) {
-            show = false;
-        }
-
-        if (searchFilter && !project.name.toLowerCase().includes(searchFilter)) {
-            show = false;
-        }
-
-        cards[index].style.display = show ? 'block' : 'none';
-        rows[index].style.display = show ? 'table-row' : 'none';
-    });
-
-    updateStats();
-}
-
-function updateStats() {
-    const visibleProjects = projects.filter((project, index) => {
-        const card = document.querySelectorAll('.project-card')[index];
-        return card && card.style.display !== 'none';
-    });
-
-    const total = visibleProjects.length;
-    const completed = visibleProjects.filter(p => p.status === 'Completed').length;
-    const ongoing = visibleProjects.filter(p => p.status === 'Ongoing').length;
-    const avgProgress = total > 0 ? Math.round(visibleProjects.reduce((sum, p) => sum + p.completion, 0) / total) : 0;
-
-    document.getElementById('totalProjects').textContent = total;
-    document.getElementById('completedProjects').textContent = completed;
-    document.getElementById('ongoingProjects').textContent = ongoing;
-    document.getElementById('avgProgress').textContent = avgProgress + '%';
-}
-
-function toggleView(view) {
-    const cardView = document.getElementById('projectGrid');
-    const tableView = document.getElementById('tableView');
-    const buttons = document.querySelectorAll('.view-btn');
-
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    if (view === 'cards') {
-        cardView.style.display = 'grid';
-        tableView.style.display = 'none';
-        buttons[0].classList.add('active');
-    } else {
-        cardView.style.display = 'none';
-        tableView.style.display = 'block';
-        buttons[1].classList.add('active');
-    }
-}
-
+// Add new project (placeholder for future functionality)
 function addProject() {
-    // For now, just alert - we'll implement this properly next
-    alert('Add project functionality coming next! This will open a form to add new projects.');
+    alert('Add project functionality coming next!');
 }

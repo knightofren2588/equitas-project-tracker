@@ -77,13 +77,6 @@ function createProjectCard(project) {
             <div class="notes-content">${project.notes}</div>
         </div>
         ` : ''}
-
-        ${project.actions !== 'NA' && project.actions !== '' ? `
-        <div class="upcoming-actions">
-            <div class="notes-title">Next Actions:</div>
-            <div class="notes-content">${project.actions}</div>
-        </div>
-        ` : ''}
     `;
     
     return card;

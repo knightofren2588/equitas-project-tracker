@@ -119,15 +119,14 @@ function createProjectCard(project) {
     const statusClass = project.status.toLowerCase().replace(' ', '-');
     
     card.innerHTML = `
+        <div class="priority-indicator priority-${priorityClass}"></div>
         <div class="project-header">
-            <h3 class="project-title">${project.name}</h3>
-            <div class="project-badges">
-                <span class="badge priority-${priorityClass}">${project.priority}</span>
-                <span class="badge status-${statusClass}">${project.status}</span>
+            <div>
+                <h3 class="project-title">${project.name}</h3>
+                <div class="project-type">${project.type}</div>
             </div>
+            <span class="status-badge status-${statusClass}">${project.status}</span>
         </div>
-        
-        <div class="project-type">${project.type}</div>
         
         <div class="project-details">
             <div class="detail-row">
@@ -140,16 +139,14 @@ function createProjectCard(project) {
             </div>
         </div>
         
-        <div class="progress-section">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: ${project.completion}%"></div>
-            </div>
-            <div class="progress-text">${project.completion}% Complete</div>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: ${project.completion}%"></div>
         </div>
+        <div style="text-align: center; margin-top: 8px; font-weight: 600; color: #495057;">${project.completion}% Complete</div>
         
-        <div class="current-status">
-            <div class="status-label">Current Status:</div>
-            <div class="status-content">${project.notes}</div>
+        <div class="project-notes">
+            <div class="notes-title">Current Status:</div>
+            <div class="notes-content">${project.notes}</div>
         </div>
     `;
     

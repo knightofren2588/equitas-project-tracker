@@ -127,37 +127,29 @@ function createProjectCard(project) {
             </div>
         </div>
         
-        <div class="project-meta">
-            <div class="meta-item">
-                <span class="meta-label">Type:</span>
-                <span class="meta-value">${project.type}</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Start Date:</span>
-                <span class="meta-value">${formatDate(project.startDate)}</span>
-            </div>
-            <div class="meta-item">
-                <span class="meta-label">Category:</span>
-                <span class="meta-value">${project.category}</span>
-            </div>
-        </div>
+        <div class="project-type">${project.type}</div>
         
-        <div class="project-objective">
-            <strong>Objective:</strong> ${project.objective}
-        </div>
-        
-        <div class="project-notes">
-            <strong>Notes:</strong> ${project.notes}
+        <div class="project-details">
+            <div class="detail-row">
+                <span class="detail-label">Priority:</span>
+                <span class="detail-value">${project.priority}</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Start Date:</span>
+                <span class="detail-value">${formatDate(project.startDate)}</span>
+            </div>
         </div>
         
         <div class="progress-section">
-            <div class="progress-header">
-                <span class="progress-label">Progress</span>
-                <span class="progress-percentage">${project.completion}%</span>
-            </div>
             <div class="progress-bar">
                 <div class="progress-fill" style="width: ${project.completion}%"></div>
             </div>
+            <div class="progress-text">${project.completion}% Complete</div>
+        </div>
+        
+        <div class="current-status">
+            <div class="status-label">Current Status:</div>
+            <div class="status-content">${project.notes}</div>
         </div>
     `;
     

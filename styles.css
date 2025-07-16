@@ -113,7 +113,7 @@ select, input {
     padding: 30px;
 }
 
-.project-grid {
+.projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;

@@ -305,7 +305,7 @@ const projects = [
         status: "Completed",
         priority: "High",
         type: "Safety",
-        startDate: "2025-07-02",
+        startDate: "2025-07-15",
         category: "Work - Safety",
         objective: "Enhanced Sunny with advanced weather system, improved animations, and interactive personality features",
         notes: "Added 6-environment weather system (sunny, rainy, snowy, stormy, autumn, spring), enhanced flower personality with mood system, improved visual effects with better gradients and shadows, added weather-specific messaging, enhanced safety tip rotation system, and improved overall user experience with smooth transitions",
@@ -317,10 +317,22 @@ const projects = [
         status: "Completed",
         priority: "Medium",
         type: "Web Development",
-        startDate: "2025-07-10",
+        startDate: "2025-07-15",
         category: "Work - Web Dev",
         objective: "Rebuilt project tracker from Notion export into modern web application with proper file separation",
         notes: "Collaborated with Claude AI to convert basic Notion HTML export into professional project tracking system. Separated code into organized files (index.html, styles.css, script.js, data.js, README.md), implemented responsive design with card and table views, added filtering and search functionality, created GitHub-ready file structure, and established maintainable data management system",
+        completion: 100
+    },
+    {
+        id: 28,
+        name: "King Lincoln Columbus Safety Widgets",
+        status: "Completed",
+        priority: "High",
+        type: "Web Development",
+        startDate: "2025-07-16",
+        category: "Work - Web Dev",
+        objective: "Create Columbus-themed safety widgets for King Lincoln medical center",
+        notes: "Developed comprehensive set of Columbus-themed safety widgets including safety leads, liaisons, CPR training, location info, pharmacy details, and building showcase. Used scarlet red/gray Buckeye colors, Ohio branding, and professional healthcare styling. Created compact, responsive widgets with hover effects and consistent branding across all components.",
         completion: 100
     }
 ];

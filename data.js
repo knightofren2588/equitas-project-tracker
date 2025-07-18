@@ -334,5 +334,17 @@ const projects = [
         objective: "Create Columbus-themed safety widgets for King Lincoln medical center",
         notes: "Developed comprehensive set of Columbus-themed safety widgets including safety leads, liaisons, CPR training, location info, pharmacy details, and building showcase. Used scarlet red/gray Buckeye colors, Ohio branding, and professional healthcare styling. Created compact, responsive widgets with hover effects and consistent branding across all components.",
         completion: 100
+    },
+    {
+        id: 29,
+        name: "Short North Ohio Safety Widgets",
+        status: "Completed",
+        priority: "High",
+        type: "Web Development",
+        startDate: "2025-07-10",
+        category: "Work - Web Dev",
+        objective: "Create Ohio-themed safety widgets for Short North medical center",
+        notes: "Developed comprehensive set of Ohio-themed safety widgets using teal/navy color scheme with Ohio State red accents. Created safety information hub, safety leads directory, safety liaisons, CPR training, location widgets, pharmacy details, and building showcase banner with Sunny the Safety Duck. All widgets designed with 100% width, responsive layouts, and consistent Ohio branding.",
+        completion: 100
     }
 ];

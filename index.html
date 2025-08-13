@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mike's Project Tracker - Equitas Health</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦆 Mike's Project Tracker</h1>
+            <p>Safety & Web Development Projects | Equitas Health</p>
+        </div>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="statusFilter">Status:</label>
+                <select id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Not Started">Not Started</option>
+                    <option value="On Hold">On Hold</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="typeFilter">Type:</label>
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Safety">Safety</option>
+                    <option value="Map Design">Map Design</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="searchFilter">Search:</label>
+                <input type="text" id="searchFilter" placeholder="Search projects...">
+            </div>
+
+            <div class="view-toggle">
+                <button class="view-btn active" onclick="toggleView('cards')">Cards</button>
+                <button class="view-btn" onclick="toggleView('table')">Table</button>
+            </div>
+
+            <button class="add-btn" onclick="addProject()">+ Add Project</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalProjects">0</div>
+                <div class="stat-label">Total Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedProjects">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="ongoingProjects">0</div>
+                <div class="stat-label">Ongoing</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avgProgress">0%</div>
+                <div class="stat-label">Avg Progress</div>
+            </div>
+        </div>
+
+        <div class="projects">
+            <div class="project-grid" id="projectGrid">
+                <!-- Projects will be inserted here -->
+            </div>
+
+            <div class="table-view" id="tableView">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Name</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Type</th>
+                            <th>Progress</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

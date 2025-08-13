@@ -255,13 +255,7 @@ select, input {
     color: #6c757d;
 }
 
-.upcoming-actions {
-    background: #fff3cd;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-    border-left: 4px solid #ffc107;
-}
+
 
 .view-toggle {
     display: flex;

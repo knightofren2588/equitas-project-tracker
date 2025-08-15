@@ -346,5 +346,17 @@ const projects = [
         objective: "Redesign all Equitas Health location maps to ensure compliance standards and create uniform design consistency across all clinic locations",
         notes: "Major redesign project to bring all location maps up to compliance standards with uniform design principles. Completed: King Lincoln, Short North, and Akron locations are fully redesigned and compliant. Remaining work: Dayton and Cincinnati locations need to be completed to match the new standardized design.",
         completion: 60
+    },
+    {
+        id: 30,
+        name: "Sunny the Safety Duck Birthday Widget",
+        status: "Completed",
+        priority: "Low",
+        type: "Web Development",
+        startDate: "2025-08-14",
+        category: "Work - Web Dev",
+        objective: "Create interactive birthday widget featuring Sunny the Safety Duck for Mission Central",
+        notes: "Developed safety-themed birthday widget with admin-controlled name management for Equitas Health's Mission Central page. Features Sunny the Safety Duck mascot, safety color scheme, contact info for Mike Butcher, and celebration animations. Widget is admin-controlled for professional deployment. Ongoing updates with birthdays as needed.",
+        completion: 100
     }
 ];

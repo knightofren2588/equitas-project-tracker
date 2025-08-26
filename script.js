@@ -1,5 +1,7 @@
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, projects array:', projects);
+    console.log('Projects length:', projects ? projects.length : 'undefined');
     renderProjects();
     updateStats();
     setupEventListeners();

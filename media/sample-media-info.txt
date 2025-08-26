@@ -1,0 +1,33 @@
+📸 MEDIA PLACEHOLDERS READY!
+
+**All 37 projects now have media placeholders!** You can add screenshots and videos to any project.
+
+To see the media functionality in action, add these files to your media folder:
+
+1. SHORT NORTH MAP REDO (Project ID: 1)
+   - short-north-map-overview.png
+   - short-north-emergency-exits.png
+   - short-north-map-demo.mp4
+
+2. EAP PAGE REDO (Project ID: 2)
+   - eap-page-homepage.png
+
+HOW TO ADD YOUR OWN MEDIA:
+
+**All projects are ready!** Just follow these steps:
+
+1. Take screenshots of your projects
+2. Record videos demonstrating functionality  
+3. Save them in this media folder
+4. Update the data.js file with the media information (structure already there!)
+5. The tracker will automatically display them!
+
+SUPPORTED FORMATS:
+- Images: PNG, JPG, GIF, WebP
+- Videos: MP4, WebM, MOV
+
+The media will appear below each project card with:
+- Thumbnail previews
+- Clickable enlargements
+- Modal popups for full-size viewing
+- Responsive design for all devices
